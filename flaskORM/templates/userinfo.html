@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}
+    个人中心
+{% endblock %}
+
+{% block label %}
+
+{% endblock %}
+
+{% block content %}
+
+<!-- 个人详情 -->
+    <div class="row">
+
+            <div class="col-lg-12">
+
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">个人详情</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <td rowspan="3">
+                                <img style="width:100px;height: 100px" sratec="/static/img/duolaameng.jpg/">
+                            </td>
+                            <th>姓名</th>
+                            <th>老九</th>
+                            <th>性别</th>
+                            <td>男</td>
+                        </tr>
+                        <tr>
+                            <th>年龄</th>
+                            <td>18</td>
+                            <th>身份</th>
+                            <td>讲师</td>
+
+                        </tr>
+                        <tr>
+                            <th>学科</th>
+                            <td>python</td>
+                            <th>阶段</th>
+                            <td>python阶段2/3</td>
+                        </tr>
+                        <tr>
+                            <th>联系方式</th>
+                            <td>152123456</td>
+                            <th>家庭地址</th>
+                            <td colspan="2">上海虹桥</td>
+                        </tr>
+                    </table>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+<!-- 个人详情 -->
+    <div class="row">
+
+            <div class="col-lg-12">
+
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">课程表</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>周一</th>
+                            <th>周二</th>
+                            <th>周三</th>
+                            <th>周四</th>
+                            <th>周五</th>
+                           <th>周六</th>
+                            <th>周日</th>
+                        </tr>
+                        {% for d in calendar %}
+                            <tr>
+                                {% for d in w %}
+                                    <td>{{d}}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+{% endblock %}

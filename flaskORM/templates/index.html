@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <body>
+        我是index{{ name }}
+
+        <hr>
+            {{name.1}}
+        <hr>
+        <p>jinja2变量方法</p>
+        <hr>
+            {{name.upper()}}
+        <hr>
+        <p>jinja2变量方法传参</p>
+        <hr>
+            {{name.split('o')}}
+        <hr>
+
+
+        <p>jinja2循环</p>
+            {% for n in name %}
+        <p style="color:red;">{{n+"a"}}</p>
+            {% endfor %}
+        <div>
+            <b>jinja2判断</b>
+            <hr>
+            {% if name== 'laojiu' %}
+                <p style="color:red;">{{name}}</p>
+            {% else %}
+                <p style="color: red;">没有名字</p>
+            {% endif %}
+        </div>
+
+
+
+
+    </body>
+</html>
+
+<!--
+我是index老九
+jinja2变量索引
+
+九
+jinja2变量
+
+老九
+-->
+
+<!--
+    jinja2是仿着django模板写的，但 是功能要强大，可以传参数
+-->

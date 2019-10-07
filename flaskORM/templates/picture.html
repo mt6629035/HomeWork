@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="file" name="photo">
+    <input type="submit" value="提交">
+</form>
+<img style="width:200px ;height:200px " src="/static/{{ p.picture }}">
+</body>
+</html>
