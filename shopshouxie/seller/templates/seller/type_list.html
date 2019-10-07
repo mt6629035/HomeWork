@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>全球生鲜卖家管理后台</title>
+    <link rel="stylesheet" href="{% static 'seller/css/font.css' %}">
+    <link rel="stylesheet" href="{% static 'seller/css/xadmin.css' %}">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'seller/lib/layui/layui.js' %}" charset="utf-8"></script>
+    <script type="text/javascript" src="{% static 'seller/js/xadmin.js' %}"></script>
+</head>
+
+<body class="layui-anim layui-anim-up">
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">商品类型管理</a>
+        <a href="/seller/goods_type_add/">商品类型添加</a>
+      </span>
+</div>
+<div class="x-body">
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>商品类型序号</th>
+            <th>商品类型名称</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for goods_type_obj in goods_type_obj_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ goods_type_obj.name }}</td>
+                <td>
+                    <a href="/seller/type_change/?id={{ goods_type_obj.id }}">编辑</a>
+{#                    <a href="/seller/type_delete/?id={{ goods_type_obj.id }}">删除</a>#}
+                    {#         下面一句话的href写一个#，意思是加一个盲点，和现在的 javascript:void 0 功能一样   #}
+{#    如果href里面写个百度的网站，点确定删除就删不掉，协商#，即盲点，或者写上javascript:void 0 就可以删除了    #}
+                    <a href="javascript:void 0" onclick="if (confirm('是否删除')){
+                        window.location.href='/seller/type_delete/?id={{ goods_type_obj.id }}'
+                            } ">删除</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{# 下面一个script标签是删除的时候加一个confirm警告框，问是否删除 #}
+<script>
+
+</script>
+</body>
+
+</html>

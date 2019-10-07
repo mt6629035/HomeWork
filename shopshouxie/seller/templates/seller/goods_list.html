@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>全球生鲜卖家管理后台</title>
+    <link rel="stylesheet" href="{% static 'seller/css/font.css' %}">
+    <link rel="stylesheet" href="{% static 'seller/css/xadmin.css' %}">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'seller/lib/layui/layui.js' %}" charset="utf-8"></script>
+    <script type="text/javascript" src="{% static 'seller/js/xadmin.js' %}"></script>
+</head>
+
+<body class="layui-anim layui-anim-up">
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">商品管理</a>
+        <a href="/seller/goods_add/">商品添加</a>
+      </span>
+</div>
+<div class="x-body">
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>商品序号</th>
+            <th>商品编号</th>
+            <th>商品名称</th>
+            <th>商品原价</th>
+            <th>商品现价</th>
+            <th>商品库存</th>
+            <th>商品描述</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+{#    如果没有输入的用户的名字，即没查到    #}
+        {% if queryset_obj %}
+            {% for goods_obj in queryset_obj %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ goods.goods_num }}</td>
+                <td>{{ goods.goods_name }}</td>
+                <td>{{ goods.goods_oprice }}</td>
+                <td>{{ goods.goods_cprice }}</td>
+                <td>{{ goods.goods_kucun }}</td>
+                <td>{{ goods.goods_desc}}</td>
+                <td>
+                    <a href="/seller/goods_change/?id={{ goods_obj.id }}">编辑</a>
+                    <a href="/seller/goods_delete/?id={{ goods_obj.id }}">删除</a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="8" align="center" style="font-size: 25px; padding: 50px">还没有添加商品</td>
+            </tr>
+        {% endif %}
+
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+
+</html>

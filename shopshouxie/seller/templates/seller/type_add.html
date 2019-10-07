@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>全球生鲜卖家管理后台</title>
+    <link rel="stylesheet" href="{% static 'seller/css/font.css' %}">
+    <link rel="stylesheet" href="{% static 'seller/css/xadmin.css' %}">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'seller/lib/layui/layui.js' %}" charset="utf-8"></script>
+    <script type="text/javascript" src="{% static 'seller/js/xadmin.js' %}"></script>
+    <script type="text/javascript" src="{% static 'jq/jquery-3.3.1.js' %}"></script>
+
+</head>
+
+
+<body>
+<div class="x-body layui-anim layui-anim-up">
+    {#    1.添加 enctype  action 和 csrf_token ,下面的action不写也行，但这里要写，因为前端写的路径不变，其他前端页面写的好的可以不写action#}
+    <form class="layui-form" method="post" action="/seller/type_add/" >
+        {% csrf_token %}
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red">*</span>类型名称
+            </label>
+            <div class="layui-input-inline">
+
+                <input type="text" id="L_email" name="type_name" required=""
+                       autocomplete="off" class="layui-input" >
+
+            </div>
+            <span style="color:red" id="error"></span>
+{#    下面加了个span标签，用来显示错误信息msg        #}
+            <span style="color: red">{{ msg }}</span>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_repass" class="layui-form-label">
+            </label>
+
+            <input type="submit" id="btn" class="layui-btn" lay-filter="add" lay-submit="" value="增加"/>
+
+        </div>
+    </form>
+</div>
+
+<script>
+    CKEDITOR.replace('goods_content', {uiColor: '#FFFFFF'})
+</script>
+{#下面这个script是ajax请求，是分着的，下面一个是优化的#}
+<script>
+    $(function () {
+        $("#L_email").blur(function () {
+            //1.获取文本框中的内容
+            //2.发送ajax请求
+            var content=$("#L_email").val();
+
+            $.ajax({
+                url:'/seller/type_add_ajax/',
+                type:'GET',
+                data:{'name':content},
+                success:function (res) {
+                    if(res.status=='true'){
+                        $("#error").text('此商品类型已经存在了')
+                    }else{
+                        $("#error").text('')
+                    }
+                },
+                error:function (res) {
+                    alert('失败了')
+                }
+            })
+
+        });
+    })
+</script>
+
+
+
+{#<script>#}
+{#    $(function () {#}
+{##}
+{#        $("#L_email").blur(function () {#}
+{#            // 1. 获取文本框中的内容#}
+{#            // 2. 发送ajax 请求#}
+{#            var content = $("#L_email").val();#}
+{#            //console.log(content);#}
+{#            //alert(content);#}
+{##}
+{#            $.ajax({#}
+{#                url: '/seller/type_add_ajax/',#}
+{#                type: 'GET',#}
+{#                data: {'name': content},#}
+{#                success: function (res) {#}
+{#                    //alert('成功了');#}
+{#                    //console.log(res);#}
+{#                    if (res.status == 'true') {#}
+{#                        alert('此商品类型已经存在了');#}
+{#                        $("#error").text('此商品类型已经存在了')#}
+{##}
+{#                    } else {#}
+{#                        $("#error").text('')#}
+{#                    }#}
+{#                },#}
+{#                error: function (res) {#}
+{#                    alert('error了')#}
+{#                }#}
+{#            })#}
+{##}
+{#        });#}
+{##}
+{#    })#}
+{#</script>#}
+</body>
+
+</html>
